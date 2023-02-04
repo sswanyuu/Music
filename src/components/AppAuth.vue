@@ -38,20 +38,30 @@
           <ul class="flex flex-wrap mb-4">
             <li class="flex-auto text-center">
               <a
-                class="block rounded py-3 px-4 transition hover:text-white text-white bg-blue-600"
+                class="block rounded py-3 px-4 transition"
                 href="#"
+                :class="{
+                  'hover:text-white text-white bg-blue-600': tab === 'login',
+                }"
+                @click.prevent="tab = 'login'"
                 >Login</a
               >
             </li>
             <li class="flex-auto text-center">
-              <a class="block rounded py-3 px-4 transition" href="#"
+              <a
+                class="block rounded py-3 px-4 transition"
+                href="#"
+                :class="{
+                  'hover:text-white text-white bg-blue-600': tab === 'register',
+                }"
+                @click.prevent="tab = 'register'"
                 >Register</a
               >
             </li>
           </ul>
 
           <!-- Login Form -->
-          <form>
+          <form v-show="tab === 'login'">
             <!-- Email -->
             <div class="mb-3">
               <label class="inline-block mb-2">Email</label>
@@ -78,7 +88,7 @@
             </button>
           </form>
           <!-- Registration Form -->
-          <form>
+          <form v-show="tab === 'register'">
             <!-- Name -->
             <div class="mb-3">
               <label class="inline-block mb-2">Name</label>
@@ -103,6 +113,7 @@
               <input
                 type="number"
                 class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+                placeholder="20"
               />
             </div>
             <!-- Password -->
@@ -160,13 +171,23 @@ import { mapState } from "pinia";
 import { mapWritableState } from "pinia";
 export default {
   name: "AppAuth",
+  data() {
+    return {
+      tab: "login",
+    };
+  },
   computed: {
-    ...mapState(useModalStore, ["hiddenClass"]),
-    ...mapWritableState(useModalStore, { modalVisibility: "isOpen" }),
+    ...mapState(useModalStore, ["hiddenClass", "tabClass"]),
+    ...mapWritableState(useModalStore, {
+      modalVisibility: "isOpen",
+    }),
   },
   methods: {
     closeAuth() {
       this.modalVisibility = !this.modalVisibility;
+    },
+    changeTab() {
+      this.tab;
     },
   },
 };
