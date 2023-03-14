@@ -208,9 +208,9 @@ export default {
         email: "required|email|min:3|max:100|",
         age: "required|min_value:18|max_value:130",
         password: "required|min:8|max:16|alpha_num",
-        confirm_password: "confirmed:@password",
+        confirm_password: "passwords_mismatch:@password",
         country: "required",
-        tos: "required",
+        tos: "tos",
       },
       userData: {
         country: "Taiwan",
