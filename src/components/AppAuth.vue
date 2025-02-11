@@ -88,6 +88,13 @@
             </button>
           </form>
           <!-- Registration Form -->
+          <div
+            class="text-white text-center font-bold p-4 rounded mb-4"
+            v-if="register_show_alert"
+            :class="register_alert_variant"
+          >
+            {{ register_alert_message }}
+          </div>
           <vee-form
             v-show="tab === 'register'"
             :validation-schema="schema"
@@ -185,6 +192,7 @@
             <button
               type="submit"
               class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
+              :disabled="register_in_submission"
             >
               Submit
             </button>
@@ -215,6 +223,10 @@ export default {
       userData: {
         country: "Taiwan",
       },
+      register_in_submission: false,
+      register_show_alert: false,
+      register_alert_variant: "bg-blue-500",
+      register_alert_message: "Please wait...",
     };
   },
   computed: {
@@ -232,6 +244,13 @@ export default {
     },
     register(values) {
       console.log("🚀 ~ file: AppAuth.vue:224 ~ register ~ values", values);
+      this.register_show_alert = true;
+      this.register_in_submission = true;
+      this.register_alert_variant = "bg-blue-500";
+      this.register_alert_message = "Please wait...";
+
+      this.register_alert_variant = "bg-green-500";
+      this.register_alert_message = "Account created successfully!";
     },
   },
 };
