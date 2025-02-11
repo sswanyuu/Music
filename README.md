@@ -1,57 +1,30 @@
-# music
+# 🎵 Music Streaming App
+A music streaming application UI built with Vue.js, Vite, and Pinia for state management. This project focuses on creating a visually appealing and interactive user interface, with planned features for full functionality in future updates.
 
-This template should help get you started developing with Vue 3 in Vite.
+### 🚀 Key Features (UI Completed, Functionality in Progress)
 
-## Recommended IDE Setup
+✅ Modern UI Design – A clean and engaging interface with intuitive navigation.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+✅ Song List Display – Layout for browsing and selecting songs.
 
-## Customize configuration
+✅ Playback Controls (UI Only) – Includes a progress bar and time display.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+✅ Authentication UI – Login/Register sections designed for future implementation.
 
-## Project Setup
+✅ State Management with Pinia – Ensures scalability and efficient data handling.
 
-```sh
-npm install
-```
+![home page](https://github.com/user-attachments/assets/bbb5400a-6b65-4dab-8eb8-9e4d06e7668f)
+![signup panel](https://github.com/user-attachments/assets/cf568cfe-61b2-4c2a-8f05-111f18b5f0c7)
 
-### Compile and Hot-Reload for Development
 
-```sh
-npm run dev
-```
+### 🔧 Tech Stack
+Vue.js – For building a responsive and dynamic interface.
 
-### Compile and Minify for Production
+Vite – Optimized for fast development and performance.
 
-```sh
-npm run build
-```
+Pinia – State management for handling application data efficiently.
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+SCSS / CSS Animations – Enhances visual appeal and interactivity.
 
-```sh
-npm run test:unit
-```
+### 🔹 Upcoming Features: Music playback, playlist management, user authentication, and more.
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
