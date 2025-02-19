@@ -109,6 +109,8 @@
 
 <script>
 import { ErrorMessage, Form as VeeForm, Field as VeeField } from "vee-validate";
+import { auth, db } from "@/includes/firebase";
+
 export default {
   name: "RegistrationForm",
   components: {
@@ -143,13 +145,28 @@ export default {
     };
   },
   methods: {
-    register(values) {
+    async register(values) {
       console.log("🚀 ~ file: AppAuth.vue:224 ~ register ~ values", values);
       this.show_alert = true;
       this.in_submission = true;
       this.alert_variant = "bg-blue-500";
       this.alert_message = "Please wait...";
-
+      let userCredential = null;
+      try {
+        userCredential = await auth.createUserWithEmailAndPassword(
+          values.email,
+          values.password
+        );
+      } catch (error) {
+        this.in_submission = false;
+        this.alert_variant = "bg-red-500";
+        this.alert_message = "An unexpected error occurred. Please try again.";
+        return;
+      }
+      console.log(
+        "🚀 ~ file: RegistrationForm.vue ~ register ~ userCredential",
+        userCredential
+      );
       this.alert_variant = "bg-green-500";
       this.alert_message = "Account created successfully!";
     },
