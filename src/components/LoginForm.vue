@@ -7,11 +7,7 @@
   >
     {{ alert_message }}
   </div>
-  <vee-form
-    v-show="tab === 'login'"
-    :validation-schema="schema"
-    @submit="login"
-  >
+  <vee-form :validation-schema="schema" @submit="login">
     <!-- Email -->
     <div class="mb-3">
       <label class="inline-block mb-2">Email</label>
@@ -47,12 +43,6 @@
 import { ErrorMessage, Form as VeeForm } from "vee-validate";
 export default {
   name: "LoginForm",
-  props: {
-    tab: {
-      type: String,
-      required: true,
-    },
-  },
   components: {
     ErrorMessage,
     VeeForm,

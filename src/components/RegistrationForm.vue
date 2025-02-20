@@ -8,7 +8,6 @@
     {{ alert_message }}
   </div>
   <vee-form
-    v-show="tab === 'register'"
     :validation-schema="schema"
     @submit="register"
     :initial-values="userData"
@@ -117,12 +116,6 @@ export default {
     ErrorMessage,
     VeeForm,
     VeeField,
-  },
-  props: {
-    tab: {
-      type: String,
-      required: true,
-    },
   },
   data() {
     return {
