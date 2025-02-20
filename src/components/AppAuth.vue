@@ -63,7 +63,7 @@
 </template>
 <script>
 import useModalStore from "@/stores/modal";
-import { mapState, mapWritableState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import AppLoginForm from "@/components/LoginForm.vue";
 import AppRegistrationForm from "@/components/RegistrationForm.vue";
 
@@ -79,10 +79,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useModalStore, ["hiddenClass", "tabClass"]),
-    ...mapWritableState(useModalStore, {
-      modalVisibility: "isOpen",
-    }),
+    ...mapState(useModalStore, ["hiddenClass"]),
     loginTabVisible() {
       return this.tab === "login";
     },
@@ -91,9 +88,7 @@ export default {
     },
   },
   methods: {
-    closeAuth() {
-      this.modalVisibility = !this.modalVisibility;
-    },
+    ...mapActions(useModalStore, ["closeAuth"]),
     changeTab(key) {
       this.tab = key;
     },

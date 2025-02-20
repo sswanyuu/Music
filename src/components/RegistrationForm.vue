@@ -124,6 +124,8 @@
 <script>
 import { ErrorMessage, Form as VeeForm, Field as VeeField } from "vee-validate";
 import { auth, usersCollection } from "@/includes/firebase";
+import { mapState, mapActions } from "pinia";
+import useUserStore from "@/stores/user";
 
 export default {
   name: "RegistrationForm",
@@ -154,6 +156,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(useUserStore, ["login"]),
     async register(values) {
       this.show_alert = true;
       this.in_submission = true;
@@ -180,6 +183,7 @@ export default {
           favor: values.favor,
           userId: userCredential.user.uid,
         });
+        this.login();
       } catch (error) {
         this.in_submission = false;
         this.alert_variant = "bg-red-500";
