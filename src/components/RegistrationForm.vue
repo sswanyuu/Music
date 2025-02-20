@@ -123,8 +123,8 @@
 
 <script>
 import { ErrorMessage, Form as VeeForm, Field as VeeField } from "vee-validate";
-import { auth, usersCollection } from "@/includes/firebase";
-import { mapState, mapActions } from "pinia";
+
+import { mapActions } from "pinia";
 import useUserStore from "@/stores/user";
 
 export default {
@@ -156,34 +156,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useUserStore, ["login"]),
+    ...mapActions(useUserStore, {
+      createUser: "register",
+    }),
     async register(values) {
       this.show_alert = true;
       this.in_submission = true;
       this.alert_variant = "bg-blue-500";
       this.alert_message = "Please wait...";
-      let userCredential = null;
       try {
-        userCredential = await auth.createUserWithEmailAndPassword(
-          values.email,
-          values.password
-        );
-      } catch (error) {
-        this.in_submission = false;
-        this.alert_variant = "bg-red-500";
-        this.alert_message = "An unexpected error occurred. Please try again.";
-        return;
-      }
-      try {
-        await usersCollection.add({
-          name: values.name,
-          email: values.email,
-          age: values.age,
-          country: values.country,
-          favor: values.favor,
-          userId: userCredential.user.uid,
-        });
-        this.login();
+        await this.createUser(values);
       } catch (error) {
         this.in_submission = false;
         this.alert_variant = "bg-red-500";
