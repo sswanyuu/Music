@@ -85,6 +85,21 @@
       </vee-field>
       <ErrorMessage class="text-red-600" name="country" />
     </div>
+    <!--Favor of music-->
+    <div class="mb-3">
+      <label class="inline-block mb-2">Favor of music</label>
+      <vee-field
+        as="select"
+        name="favor"
+        class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+      >
+        <option value="Pop">City Pop</option>
+        <option value="Rock">R&B</option>
+        <option value="Jazz">Jazz</option>
+        <option value="Jazz">KPop</option>
+      </vee-field>
+      <ErrorMessage class="text-red-600" name="favor" />
+    </div>
     <!-- TOS -->
     <div class="mb-3 pl-6">
       <vee-field
@@ -133,6 +148,7 @@ export default {
         password: "required|min:8|max:16|alpha_num",
         confirm_password: "passwords_mismatch:@password",
         country: "required",
+        favor: "required",
         tos: "tos",
       },
     };
@@ -161,6 +177,7 @@ export default {
           email: values.email,
           age: values.age,
           country: values.country,
+          favor: values.favor,
           userId: userCredential.user.uid,
         });
       } catch (error) {
