@@ -272,8 +272,22 @@
 <script>
 import AppHeader from "@/components/AppHeader.vue";
 import AppAuth from "@/components/AppAuth.vue";
+import { mapState, mapActions } from "pinia";
+import useUserStore from "@/stores/user";
+import { auth } from "@/includes/firebase";
 export default {
   name: "App",
   components: { AppHeader, AppAuth },
+  computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(useUserStore, ["login"]),
+  },
+  created() {
+    if (auth.currentUser) {
+      this.login(auth.currentUser);
+    }
+  },
 };
 </script>

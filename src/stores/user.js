@@ -11,21 +11,23 @@ export default defineStore("user", {
         values.email,
         values.password
       );
-      await usersCollection.add({
+      await usersCollection.doc(userCredential.user.uid).set({
         name: values.name,
         email: values.email,
         age: values.age,
         country: values.country,
         favor: values.favor,
-        userId: userCredential.user.uid,
+      });
+      await userCredential.user.updateProfile({
+        displayName: values.name,
       });
       this.login();
     },
     login() {
-      this.loggedIn = true;
+      this.isLoggedIn = true;
     },
     logout() {
-      this.loggedIn = false;
+      this.isLoggedIn = false;
     },
   },
   getters: {},
