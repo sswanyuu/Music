@@ -41,6 +41,8 @@
 </template>
 <script>
 import { ErrorMessage, Form as VeeForm } from "vee-validate";
+import { mapActions } from "pinia";
+import useUserStore from "@/stores/user";
 export default {
   name: "LoginForm",
   components: {
@@ -60,14 +62,24 @@ export default {
     };
   },
   methods: {
-    login(values) {
-      console.log("🚀 ~ file: AppAuth.vue:224 ~ register ~ values", values);
+    ...mapActions(useUserStore, ["authenticate"]),
+    async login(values) {
       this.in_submission = true;
       this.show_alert = true;
       this.alert_variant = "bg-blue-500";
       this.alert_message = "Please wait, we are logging you in...";
+      try {
+        await this.authenticate(values);
+      } catch (error) {
+        this.in_submission = false;
+        this.alert_variant = "bg-red-500";
+        this.alert_message = "Invalid login details. Please try again.";
+        return;
+      }
+
       this.alert_variant = "bg-green-500";
       this.alert_message = "Success! You are now logged in!";
+      window.location.reload();
     },
   },
 };

@@ -174,6 +174,7 @@ export default {
       }
       this.alert_variant = "bg-green-500";
       this.alert_message = "Account created successfully!";
+      window.location.reload();
     },
   },
 };
