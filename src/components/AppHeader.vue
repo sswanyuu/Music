@@ -49,6 +49,8 @@
 import { mapState, mapActions } from "pinia";
 import useModalStore from "@/stores/modal";
 import useUserStore from "@/stores/user";
+import { AUTHENTICATED_ROUTES } from "@/router/routeManager";
+
 export default {
   name: "AppHeader",
   computed: {
@@ -57,6 +59,12 @@ export default {
   methods: {
     ...mapActions(useModalStore, ["toggleAuthVisibility"]),
     ...mapActions(useUserStore, ["signOut"]),
+    signOut() {
+      useUserStore().signOut();
+      if (AUTHENTICATED_ROUTES.includes(this.$route.name)) {
+        this.$router.push({ name: "home" });
+      }
+    },
   },
 };
 </script>

@@ -176,3 +176,24 @@
     </div>
   </section>
 </template>
+<script>
+import useUserStore from "@/stores/user";
+
+import { mapState } from "pinia";
+
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Manage",
+  computed: {
+    ...mapState(useUserStore, ["isLoggedIn"]),
+  },
+  beforeRouteEnter(to, from, next) {
+    console.log("Before Route Enter");
+    if (!useUserStore().isLoggedIn) {
+      next({ name: "home" });
+    } else {
+      next();
+    }
+  },
+};
+</script>

@@ -20,8 +20,8 @@ const routes = [
     component: Manage,
   },
   {
-    path: "/:catchAll(.*)",
-    redirect: { name: "home" },
+    path: "/:pathMatch(.*)*",
+    redirect: { name: "home", params: {} },
   },
 ];
 const router = createRouter({
